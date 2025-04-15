@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Helper</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <span class="brand-name">Farmer's Helper</span>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section id="home">
+            <h1>Welcome to Farmer's Helper</h1>
+            <p>Your go-to platform for crop disease identification and crop suitability predictions.</p>
+        </section>
+
+        <section id="weather">
+            <h2>Weather Forecast</h2>
+            <p>Get real-time weather updates to help you plan better. For that click on Weather in navigation bar.</p>
+            <!-- You can integrate a weather API here for live updates -->
+        </section>
+
+        <div class="three-column-layout">
+            <section id="disease">
+                <h2>Identify Crop Diseases</h2>
+                <p>Select a crop and symptoms to get a disease diagnosis.</p>
+                <button onclick="window.location.href='tryout.html'">Identify Crop Diseases</button>
+            </section>
+        
+            <section id="cropPrediction">
+                <h2>Find the Best Crop</h2>
+                <p>Select soil type and season to get the most suitable crop.</p>
+                <button onclick="window.location.href='Crop_Recommend.html'">Get Prediction</button>
+            </section>
+            
+        
+            <section id="weatherBox">
+                <h2>Weather Forecast</h2>
+                <p>Plan your farming with up-to-date weather information.</p>
+                <button onclick="window.location.href='dashboard.html'">Check Weather</button>
+            </section>
+        </div>
+        
+
+        <section id="about">
+            <h2>About the Platform</h2>
+            <p>This platform helps farmers to easily identify crop diseases and receive crop recommendations based on their soil types.Our project aims to revolutionize Indian agriculture through technology by integrating real-time weather forecasts, crop disease detection and crop recommendations. By leveraging data-driven insights, we empower farmers with the right knowledge to enhance yield, reduce losses, and promote sustainable farming practices.This software will serve as a smart agricultural assistant, helping farmers make informed decisions and improve overall efficiency in the sector.
+            </p>
+        </section>
+    </div>        
+</body>
+</html>
+

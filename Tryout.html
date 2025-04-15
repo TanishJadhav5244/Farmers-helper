@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Predictor</title>
+    <link rel="stylesheet" href="try.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        select, button {
+            margin: 10px;
+            padding: 8px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+        #diseaseImage {
+            margin-top: 20px;
+            max-width: 400px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Select Crop and Symptoms</h2>
+    <label for="crop">Crop:</label>
+    <select id="crop">
+        <option value="">--Select Crop--</option>
+    </select>
+    <label for="symptom1">Symptom 1:</label>
+    <select id="symptom1">
+        <option value="">--Select Symptom 1--</option>
+    </select>
+    <br>
+    <button onclick="findDisease()">Find Disease</button>
+    <p id="result"></p>
+    <img id="diseaseImage" src="" alt="Disease Image">
+
+    <script>
+        const data = [
+            { crop: "Sugarcane", symptom1: "Whiteflies", symptom2: "Leaves turn yellow", disease: "Sugarcane Whiteflies", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/DALL_E_2025-03-19_16.05.46_-_A_highly_detailed_realistic_image_of_a_sugarcane_whitefly_on_a_sugarcane_leaf._The_whitefly_is_small_with_a_pale_white_body_and_delicate_wings_sitt_1.webp?v=1742382074" },
+            { crop: "Sugarcane", symptom1: "Leaf hopper", symptom2: "Leaves curl", disease: "Sugarcane Leaf hopper", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/download_17__11zon.webp?v=1742382113" },
+            { crop: "Sugarcane", symptom1: "Mealybugs", symptom2: "Leaves wilt", disease: "Sugarcane Mealybugs", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/images_2__11zon_4bfc4789-cd39-4f46-aae6-a44951b72e41.webp?v=1742382555" },
+            { crop: "Wheat", symptom1: "diseased ears come out of the boot", symptom2: "black patches or spots", disease: "Wheat Smut", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/download_22__11zon.webp?v=1742382555" }
+        ];
+
+        function populateDropdown(id, values) {
+            let dropdown = document.getElementById(id);
+            values.forEach(value => {
+                let option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                dropdown.appendChild(option);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let crops = ["Sugarcane", "Wheat"];
+            let symptoms1 = ["Whiteflies", "Leaf hopper", "Mealybugs", "diseased ears come out of the boot"];
+
+            populateDropdown("crop", crops);
+            populateDropdown("symptom1", symptoms1);
+        });
+
+        function findDisease() {
+            let crop = document.getElementById("crop").value;
+            let symptom1 = document.getElementById("symptom1").value;
+
+            let disease = data.find(entry => entry.crop === crop && entry.symptom1 === symptom1);
+
+            if (disease) {
+                document.getElementById("result").textContent = "Disease: " + disease.disease;
+                document.getElementById("diseaseImage").src = disease.image;
+                document.getElementById("diseaseImage").style.display = "block";
+            } else {
+                document.getElementById("result").textContent = "No matching disease found.";
+                document.getElementById("diseaseImage").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

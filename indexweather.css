@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #E8F0FE, #F8F9FA);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    background: linear-gradient(90deg, #A1C4FD, #C2E9FB);
+    font-size: 2.5rem;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 30px;
+    color: #4A5568;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.weather-input {
+    background: #FFFFFF;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.weather-input h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #2D3748;
+}
+
+.weather-input input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #CBD5E0;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.weather-input button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.search-btn {
+    background: #A3BFFA;
+    color: #2D3748;
+}
+
+.location-btn {
+    background: #D4E4FF;
+    color: #2D3748;
+}
+
+button:hover {
+    background: #8FA9E6;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background: #DDDDDD;
+    margin: 20px 0;
+    position: relative;
+}
+
+.separator::before {
+    content: "or";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFFFFF;
+    padding: 0 10px;
+    color: #6C757D;
+}
+
+/* Weather Data Section */
+.weather-data {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.current-weather {
+    background: #D3E0FF;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.current-weather .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.current-weather .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.days-forecast {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.days-forecast h2 {
+    margin-bottom: 20px;
+    color: #2D3748;
+}
+
+.weather-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.card {
+    background: #F0F7FF;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 15px);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: #4A5568;
+    margin-bottom: 10px;
+}
+
+.card img {
+    max-width: 60px;
+}
+
+.weather-data h6 {
+    font-size: 1rem;
+    color: #2D3748;
+}
+
+ 
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .weather-cards .card {
+        width: 100%;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .weather-input h3 {
+        font-size: 1.2rem;
+    }
+}
+.suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #CBD5E0;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+.suggestions li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.suggestions li:hover {
+    background-color: #D4E4FF;
+}
+
+/* Updated Suggestions Dropdown Styles */
+.weather-input {
+    position: relative; /* Ensure the suggestions are positioned correctly */
+}
+
+.suggestions {
+    list-style: none;
+    margin-top: -10px; /* Pulls suggestions closer to the input field */
+    padding: 0;
+    border: 1px solid #CBD5E0;
+    border-top: none; /* Removes the border between input and suggestions */
+    border-radius: 0 0 8px 8px; /* Rounded corners only at the bottom */
+    background-color: #FFFFFF;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.weather-input:focus-within .suggestions {
+    opacity: 1;
+    visibility: visible;
+}
+
+.suggestions li {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.suggestions li:hover {
+    background-color: #A3BFFA; /* Updated hover color for better contrast */
+    color: #FFFFFF;
+}
+
+/* Improved Input Styles */
+.weather-input input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 0; /* Removed bottom margin for seamless suggestions integration */
+    border: 1px solid #CBD5E0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.weather-input input:focus {
+    border-color: #A1C4FD;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsiveness Adjustments */
+@media (max-width: 600px) {
+    .weather-input {
+        padding: 15px;
+    }
+
+    .suggestions {
+        max-height: 150px;
+    }
+}

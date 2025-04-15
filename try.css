@@ -1,0 +1,67 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f1f8e9, #e3f2fd);
+    color: #333;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    color: #33691e;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    margin: 10px;
+}
+
+select {
+    padding: 10px 15px;
+    margin: 10px;
+    border: 2px solid #aed581;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    border-color: #689f38;
+    outline: none;
+    box-shadow: 0 0 8px rgba(104, 159, 56, 0.3);
+}
+
+button {
+    padding: 12px 25px;
+    background-color: #689f38;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #33691e;
+}
+
+#result {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #33691e;
+}
+
+#diseaseImage {
+    margin-top: 20px;
+    max-width: 100%;
+    border: 3px solid #aed581;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
