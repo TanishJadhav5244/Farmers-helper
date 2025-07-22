@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%) !important;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #43a047 0%, #81c784 100%) !important;
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+        }
+        .nav-brand, .brand-name, .nav-link, .nav-link i {
+            color: #fff !important;
+        }
+        .nav-link:hover, .nav-link:focus {
+            color: #212121 !important;
+            background: rgba(255,255,255,0.18);
+            border-radius: 12px;
+        }
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+        .hero-section h1 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #388e3c;
+            text-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+            margin-bottom: 0.7rem;
+        }
+        .hero-section h1::after {
+            content: '';
+            display: block;
+            margin: 0.5rem auto 0 auto;
+            width: 80px;
+            height: 4px;
+            background: #c8e6c9;
+            border-radius: 2px;
+        }
+        .hero-section .hero-subtitle {
+            color: #388e3c;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-cloud-sun"></i>
+            <span class="brand-name">Weather Dashboard</span>
+        </div>
+        <div class="nav-controls">
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>Welcome to Weather Dashboard</h1>
+            <p class="hero-subtitle">Your go-to app for real-time weather updates and forecasts</p>
+            <p class="hero-description">Gateway to real-time weather insights! ☀️🌧️🌍</p>
+        </div>
+
+        <div class="weather-input">
+            <h3><i class="fas fa-search"></i> Search Location</h3>
+            <form id="weather-form" class="search-form">
+                <div class="input-group">
+                    <input type="text" id="location-input" placeholder="Enter city name" spellcheck="false" autocomplete="off">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div id="suggestions" class="suggestions"></div>
+            </form>
+            <div class="separator"></div>
+            <button class="location-btn" id="location-btn">
+                <i class="fas fa-map-marker-alt"></i> Use Current Location
+            </button>
+        </div>
+
+        <div class="weather-data">
+            <div class="current-weather">
+                <div class="weather-header">
+                    <h2><i class="fas fa-map-marker-alt"></i> <span class="city" id="city">New York</span></h2>
+                    <div class="weather-time">
+                        <span class="time-location" id="time-location">Loading...</span>
+                        <span class="day-time" id="day-time">Good Morning</span>
+                    </div>
+                </div>
+                <div class="weather-main">
+                    <div class="weather-icon-temp">
+                        <div class="icon">
+                            <img id="weather-icon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="weather-icon">
+                            <span class="temp" id="temp">25°C</span>
+                        </div>
+                        <div class="weather-info">
+                            <div class="condition" id="condition">Clear Sky</div>
+                            <div class="feels-like">Feels like <span id="feels-like">27°C</span></div>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Humidity</span>
+                                <span class="detail-value" id="humidity">65%</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-wind"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Wind Speed</span>
+                                <span class="detail-value" id="wind-speed">5 km/h</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-eye"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Visibility</span>
+                                <span class="detail-value" id="visibility">10 km</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Pressure</span>
+                                <span class="detail-value" id="pressure">1013 hPa</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-sun"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">UV Index</span>
+                                <span class="detail-value" id="uv-index">5</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-thermometer-half"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Dew Point</span>
+                                <span class="detail-value" id="dew-point">18°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hourly-forecast">
+                <h2><i class="fas fa-clock"></i> Hourly Forecast</h2>
+                <div class="hourly-cards" id="hourly-forecast">
+                    <!-- Hourly forecast cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="days-forecast">
+                <h2><i class="fas fa-calendar-alt"></i> 5-Day Forecast</h2>
+                <div class="weather-cards" id="daily-forecast">
+                    <!-- Daily forecast cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-alerts" id="weather-alerts">
+            <!-- Weather alerts will be populated by JavaScript -->
+        </div>
+
+        <div class="features">
+            <h2><i class="fas fa-star"></i> Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Accurate Forecasts</h3>
+                    <p>Get up-to-date weather reports for your location and beyond</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Alerts & Notifications</h3>
+                    <p>Stay informed with instant weather alerts and notifications</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Responsive Design</h3>
+                    <p>Access weather information seamlessly on any device</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-map"></i>
+                    <h3>Interactive Maps</h3>
+                    <p>Explore real-time weather maps with live radar and satellite images</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Weather Dashboard. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading weather data...</p>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="toast-icon"></i>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

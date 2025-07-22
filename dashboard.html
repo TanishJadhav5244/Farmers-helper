@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+      <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+      <div class="container">
+       <div class="weather-input">
+           <h3>Enter City</h3>
+           <input type="text" class="city-input" placeholder="Enter city" />
+           <ul class="suggestions"></ul> <!-- List for suggestions -->
+           <button class="search-btn">Search</button>
+           <div class="separator"></div>
+           <button class="location-btn">Use my location</button>
+        </div>
+         <div class="weather-data">
+            <div class="current-weather"></div>
+            <div class="days-forecast">
+                <h2>2-Day Forecast</h2>
+                <ul class="weather-cards"></ul>
+            </div>
+        </div>
+     </div>
+    <button id="print-button">Print Weather</button>
+    </div>
+    <script src="script1.js"></script>
+</body>
+</html>

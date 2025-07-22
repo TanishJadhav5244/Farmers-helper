@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Predictor</title>
+    <link rel="stylesheet" href="try.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2E7D32;
+            --background-color: #f5f5f5;
+            --text-color: #222;
+            --card-shadow: 0 8px 24px rgba(44, 62, 80, 0.13);
+            --container-bg: rgba(255, 255, 255, 0.97);
+            --border-radius: 18px;
+            --input-border: 2.5px solid #81c784;
+            --input-bg: #f8fafc;
+            --input-hover: #e8f5e9;
+            --input-focus: #c8e6c9;
+            --btn-shadow: 0 6px 18px rgba(44, 62, 80, 0.13);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 540px;
+            width: 100%;
+            background: rgba(255,255,255,0.85);
+            padding: 2.8rem 2.2rem 2.2rem 2.2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 2.2rem;
+            font-size: 2.3rem;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, #43a047, #81c784);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 16px rgba(44, 62, 80, 0.10);
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #43a047, #cddc39);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1.15rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: 0.5px;
+        }
+
+        select {
+            width: 100%;
+            max-width: 500px;
+            padding: 1.1rem;
+            border: var(--input-border);
+            border-radius: 14px;
+            font-size: 1.08rem;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        select:hover {
+            border-color: #43a047;
+            background: var(--input-hover);
+            box-shadow: 0 5px 15px rgba(67, 160, 71, 0.10);
+        }
+
+        select:focus {
+            border-color: #388e3c;
+            background: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.13);
+        }
+
+        button {
+            background: linear-gradient(90deg, #43a047 0%, #81c784 100%);
+            color: #fff;
+            padding: 1.2rem 2rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            border: none;
+            border-radius: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+            box-shadow: var(--btn-shadow);
+            width: 100%;
+            max-width: 500px;
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #388e3c 0%, #66bb6a 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px 0 #81c784, 0 2px 8px rgba(44, 62, 80, 0.13);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        a[role="button"], a > button {
+            margin-top: 1rem;
+            background: linear-gradient(90deg, #43a047 0%, #81c784 100%);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            width: 100%;
+            max-width: 500px;
+            padding: 1.2rem 2rem;
+            box-shadow: var(--btn-shadow);
+            text-transform: uppercase;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        a[role="button"]:hover, a > button:hover {
+            background: linear-gradient(90deg, #388e3c 0%, #66bb6a 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px 0 #81c784, 0 2px 8px rgba(44, 62, 80, 0.13);
+        }
+
+        .result-container {
+            margin-top: 2.2rem;
+            background: linear-gradient(120deg, #f1f8e9 60%, #c8e6c9 100%);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+            padding: 2.2rem 1.2rem;
+            border: 1.5px solid #81c784;
+            width: 100%;
+            max-width: 540px;
+            animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #result {
+            margin-top: 0.5rem;
+            padding: 1.2rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            font-size: 1.18rem;
+            text-align: center;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 4px solid var(--primary-color);
+            color: #222;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        #diseaseImage {
+            margin-top: 2rem;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            display: none;
+            transition: transform 0.3s ease;
+        }
+
+        #diseaseImage:hover {
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+            button, select, a[role="button"], a > button {
+                max-width: 100%;
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading animation for the button */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="position: fixed; top: 30px; left: 30px; z-index: 1000; display: flex; gap: 16px;">
+        <a href="index.html" style="text-decoration: none;">
+            <span style="display: flex; align-items: center; background: linear-gradient(90deg, #43a047 0%, #81c784 100%); color: #fff; padding: 0.7rem 1.5rem; border-radius: 20px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(44, 62, 80, 0.13); gap: 10px; letter-spacing: 1px;">
+                <i class="fas fa-home"></i> Home
+            </span>
+        </a>
+        <a href="indexweather.html" style="text-decoration: none;">
+            <span style="display: flex; align-items: center; background: linear-gradient(90deg, #43a047 0%, #81c784 100%); color: #fff; padding: 0.7rem 1.5rem; border-radius: 20px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(44, 62, 80, 0.13); gap: 10px; letter-spacing: 1px;">
+                <i class="fas fa-cloud-sun"></i> Weather
+            </span>
+        </a>
+        <a href="about.html" style="text-decoration: none;">
+            <span style="display: flex; align-items: center; background: linear-gradient(90deg, #43a047 0%, #81c784 100%); color: #fff; padding: 0.7rem 1.5rem; border-radius: 20px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(44, 62, 80, 0.13); gap: 10px; letter-spacing: 1px;">
+                <i class="fas fa-info-circle"></i> About
+            </span>
+        </a>
+    </div>
+    <div class="container">
+        <h2>Crop Disease Predictor</h2>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <label for="crop">Select Crop</label>
+            <select id="crop" style="width: 100%; max-width: 500px;"></select>
+        </div>
+        <div class="form-group" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <label for="symptom1">Select Symptom</label>
+            <select id="symptom1" style="width: 100%; max-width: 500px;"></select>
+        </div>
+        <button onclick="findDisease()" style="width: 100%; max-width: 500px; margin: 0 auto; display: block;">Find Disease</button>
+        <a href="home.html" role="button" style="width: 100%; max-width: 500px; margin: 1rem auto 0 auto; display: block; text-decoration: none; background: linear-gradient(90deg, #43a047 0%, #81c784 100%); color: #fff; border-radius: 14px; font-size: 1.15rem; font-weight: 700; letter-spacing: 1px; box-shadow: var(--btn-shadow); text-transform: uppercase; font-family: 'Poppins', sans-serif; padding: 1.2rem 2rem; border: none; transition: all 0.3s; text-align: center;">
+            REAL IMAGE
+        </a>
+        <div class="result-container">
+            <p id="result"></p>
+            <img id="diseaseImage" src="" alt="Disease Image">
+        </div>
+    </div>
+
+    <script>
+        const data = [
+            { crop: "Sugarcane", symptom1: "Whiteflies", symptom2: "Leaves turn yellow", disease: "Sugarcane Whiteflies", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/DALL_E_2025-03-19_16.05.46_-_A_highly_detailed_realistic_image_of_a_sugarcane_whitefly_on_a_sugarcane_leaf._The_whitefly_is_small_with_a_pale_white_body_and_delicate_wings_sitt_1.webp?v=1742382074" },
+            { crop: "Sugarcane", symptom1: "Leaf hopper", symptom2: "Leaves curl", disease: "Sugarcane Leaf hopper", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/download_17__11zon.webp?v=1742382113" },
+            { crop: "Sugarcane", symptom1: "Mealybugs", symptom2: "Leaves wilt", disease: "Sugarcane Mealybugs", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/images_2__11zon_4bfc4789-cd39-4f46-aae6-a44951b72e41.webp?v=1742382555" },
+            { crop: "Wheat", symptom1: "diseased ears come out of the boot", symptom2: "black patches or spots", disease: "Wheat Smut", image: "https://cdn.shopify.com/s/files/1/0762/3639/0696/files/download_22__11zon.webp?v=1742382555" }
+        ];
+
+        function populateDropdown(id, values) {
+            let dropdown = document.getElementById(id);
+            values.forEach(value => {
+                let option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                dropdown.appendChild(option);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let crops = ["Sugarcane", "Wheat"];
+            let symptoms1 = ["Whiteflies", "Leaf hopper", "Mealybugs", "diseased ears come out of the boot"];
+
+            populateDropdown("crop", crops);
+            populateDropdown("symptom1", symptoms1);
+        });
+
+        function findDisease() {
+            let crop = document.getElementById("crop").value;
+            let symptom1 = document.getElementById("symptom1").value;
+
+            let disease = data.find(entry => entry.crop === crop && entry.symptom1 === symptom1);
+
+            if (disease) {
+                document.getElementById("result").textContent = "Disease: " + disease.disease;
+                document.getElementById("diseaseImage").src = disease.image;
+                document.getElementById("diseaseImage").style.display = "block";
+            } else {
+                document.getElementById("result").textContent = "No matching disease found.";
+                document.getElementById("diseaseImage").style.display = "none";
+            }
+        }
+    </script>
+ <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+ <script>
+     let csvData = [];
+ 
+     const cropDropdown = document.getElementById("crop");
+     const symptom1Dropdown = document.getElementById("symptom1");
+ 
+     fetch('DiseasesDB.csv')
+         .then(res => res.text())
+         .then(text => {
+             const parsed = Papa.parse(text, { header: true });
+             csvData = parsed.data;
+ 
+             // Populate crop dropdown
+             const crops = [...new Set(csvData.map(row => row.Crop?.trim()).filter(Boolean))];
+             crops.forEach(crop => {
+                 const opt = document.createElement("option");
+                 opt.value = crop;
+                 opt.textContent = crop;
+                 cropDropdown.appendChild(opt);
+             });
+         });
+ 
+     // On crop selection
+     cropDropdown.addEventListener("change", () => {
+         const selectedCrop = cropDropdown.value;
+         symptom1Dropdown.innerHTML = '<option value="">--Select Symptom 1--</option>';
+ 
+         const symptoms = csvData
+             .filter(row => row.Crop?.trim() === selectedCrop)
+             .map(row => row.Symptom1?.trim())
+             .filter((sym, i, arr) => sym && arr.indexOf(sym) === i);
+ 
+         symptoms.forEach(sym => {
+             const opt = document.createElement("option");
+             opt.value = sym;
+             opt.textContent = sym;
+             symptom1Dropdown.appendChild(opt);
+         });
+     });
+ 
+     function findDisease() {
+         const crop = cropDropdown.value;
+         const symptom = symptom1Dropdown.value;
+ 
+         const match = csvData.find(row =>
+             row.Crop?.trim() === crop && row.Symptom1?.trim() === symptom
+         );
+ 
+         if (match) {
+             document.getElementById("result").textContent = "Disease: " + match.Disease;
+             if (match.Image && match.Image.startsWith("http")) {
+                 document.getElementById("diseaseImage").src = match.Image;
+                 document.getElementById("diseaseImage").style.display = "block";
+             } else {
+                 document.getElementById("diseaseImage").style.display = "none";
+             }
+         } else {
+             document.getElementById("result").textContent = "No matching disease found.";
+             document.getElementById("diseaseImage").style.display = "none";
+         }
+     }
+ </script>
+ 
+
+
+</body>
+</html>

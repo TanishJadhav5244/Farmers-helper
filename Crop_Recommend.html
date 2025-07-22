@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation</title>
+    <link rel="stylesheet" href="crop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-leaf"></i>
+            <span class="brand-name">Farmer's Helper</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="recommendation-card">
+            <div class="card-header">
+                <i class="fas fa-seedling"></i>
+                <h1>Crop Recommendation</h1>
+                <p>Select soil type and weather conditions to get the best crop recommendations</p>
+            </div>
+
+            <div class="form-group">
+                <label for="soilDropdown">
+                    <i class="fas fa-mountain"></i>
+                    Soil Type
+                </label>
+                <select id="soilDropdown" class="modern-select">
+                    <option value="">Select Soil Type</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="weatherDropdown">
+                    <i class="fas fa-cloud-sun"></i>
+                    Weather Condition
+                </label>
+                <select id="weatherDropdown" class="modern-select">
+                    <option value="">Select Weather</option>
+                </select>
+            </div>
+
+            <button id="recommendButton" class="modern-btn">
+                <span>Get Recommendations</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <div id="result" class="result-container">
+                <i class="fas fa-lightbulb"></i>
+                <p class="result-text">Select options above to get recommendations</p>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Understanding Soil Types</h2>
+            <div class="soil-info-grid">
+                <div class="soil-info-card">
+                    <i class="fas fa-sun"></i>
+                    <h3>Sandy Soil</h3>
+                    <p>Light, warm, dry, and low in nutrients. Perfect for root vegetables.</p>
+                </div>
+                <div class="soil-info-card">
+                    <i class="fas fa-water"></i>
+                    <h3>Loamy Soil</h3>
+                    <p>Perfect balance of sand, silt, and clay. Ideal for most crops.</p>
+                </div>
+                <div class="soil-info-card">
+                    <i class="fas fa-tree"></i>
+                    <h3>Peaty Soil</h3>
+                    <p>High in organic matter, retains moisture. Great for acid-loving plants.</p>
+                </div>
+                <div class="soil-info-card">
+                    <i class="fas fa-mountain"></i>
+                    <h3>Clay Soil</h3>
+                    <p>Heavy, cold, and wet in winter. Good for summer crops.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const soilTypes = ["Sandy", "Loamy", "Peaty", "Clay", "Silty"];
+        const weatherConditions = ["Sunny", "Rainy", "Stormy", "Cloudy"];
+
+        const cropData = [
+            { soil: "Sandy", weather: "Sunny", crop: "Barley" },
+            { soil: "Loamy", weather: "Sunny", crop: "Corn" },
+            { soil: "Peaty", weather: "Rainy", crop: "Wheat" },
+            { soil: "Sandy", weather: "Sunny", crop: "Soybeans" },
+            { soil: "Clay", weather: "Stormy", crop: "Barley" }
+        ];
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const soilDropdown = document.getElementById("soilDropdown");
+            const weatherDropdown = document.getElementById("weatherDropdown");
+            const resultDiv = document.getElementById("result");
+            const resultText = resultDiv.querySelector(".result-text");
+
+            soilTypes.forEach(type => {
+                let option = document.createElement("option");
+                option.value = type;
+                option.textContent = type;
+                soilDropdown.appendChild(option);
+            });
+
+            weatherConditions.forEach(condition => {
+                let option = document.createElement("option");
+                option.value = condition;
+                option.textContent = condition;
+                weatherDropdown.appendChild(option);
+            });
+
+            document.getElementById("recommendButton").addEventListener("click", function () {
+                let selectedSoil = soilDropdown.value;
+                let selectedWeather = weatherDropdown.value;
+                
+                if (!selectedSoil || !selectedWeather) {
+                    resultText.textContent = "Please select both soil type and weather condition";
+                    resultDiv.classList.add("error");
+                    return;
+                }
+
+                let recommendedCrops = cropData.filter(entry => 
+                    entry.soil === selectedSoil && entry.weather === selectedWeather
+                ).map(entry => entry.crop);
+
+                if (recommendedCrops.length > 0) {
+                    resultText.textContent = `Recommended Crops: ${recommendedCrops.join(", ")}`;
+                    resultDiv.classList.remove("error");
+                    resultDiv.classList.add("success");
+                } else {
+                    resultText.textContent = "No matching crops found for the selected conditions";
+                    resultDiv.classList.remove("success");
+                    resultDiv.classList.add("error");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

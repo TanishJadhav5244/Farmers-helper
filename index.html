@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer's Helper</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-leaf"></i>
+            <span class="brand-name">Farmer's Helper</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+            <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+        </div>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="glow-text">Welcome to Farmer's Helper</h1>
+                <p class="hero-subtitle">Your smart agricultural assistant for better farming decisions</p>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-seedling"></i>
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Crops Analyzed</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Weather Updates</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Accuracy Rate</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="features-grid">
+            <section id="disease" class="feature-card">
+                <div class="card-icon">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <h2>Identify Crop Diseases</h2>
+                <p>Advanced AI-powered disease detection for your crops</p>
+                <button class="modern-btn" onclick="window.location.href='tryout.html'">
+                    <span>Identify Diseases</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </section>
+        
+            <section id="cropPrediction" class="feature-card">
+                <div class="card-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h2>Find the Best Crop</h2>
+                <p>Smart recommendations based on soil and climate</p>
+                <button class="modern-btn" onclick="window.location.href='Crop_Recommend.html'">
+                    <span>Get Prediction</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </section>
+            
+            <section id="weatherBox" class="feature-card">
+                <div class="card-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <h2>Weather Forecast</h2>
+                <p>Real-time weather updates for better planning</p>
+                <button class="modern-btn" onclick="window.location.href='indexweather.html'">
+                    <span>Check Weather</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </section>
+        </div>
+
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <h2>About Our Platform</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>This platform helps farmers to easily identify crop diseases and receive crop recommendations based on their soil types. Our project aims to revolutionize Indian agriculture through technology by integrating real-time weather forecasts, crop disease detection and crop recommendations.</p>
+                        <p>By leveraging data-driven insights, we empower farmers with the right knowledge to enhance yield, reduce losses, and promote sustainable farming practices.</p>
+                    </div>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <h3>AI-Powered</h3>
+                            <p>Advanced algorithms for accurate predictions</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Mobile Friendly</h3>
+                            <p>Access anywhere, anytime</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3>Data-Driven</h3>
+                            <p>Based on real agricultural data</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Farmer's Helper</h3>
+                <p>Empowering farmers with technology</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Farmer's Helper. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
