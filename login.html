@@ -1,115 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Farmer's Helper</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .form-box {
-            background: linear-gradient(135deg, #fff 60%, #e8f5e9 100%);
-            padding: 2.8rem 2.2rem 2.2rem 2.2rem;
-            border-radius: 28px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 12px 36px 0 rgba(44, 62, 80, 0.13);
-            border: 2.5px solid #81c784;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            margin-bottom: 2.5rem;
-        }
-        .form-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #388e3c;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-        }
-        .input-box {
-            margin-bottom: 1.5rem;
-        }
-        .input-box input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #c8e6c9;
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: #f9f9f9;
-            transition: border-color 0.3s;
-        }
-        .input-box input:focus {
-            border-color: #43a047;
-            outline: none;
-        }
-        .btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(90deg, #43a047, #81c784);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            margin-top: 0.5rem;
-        }
-        .btn:hover {
-            background: linear-gradient(90deg, #388e3c, #cddc39);
-            transform: translateY(-2px);
-        }
-        .register-link {
-            display: block;
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #388e3c;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .register-link:hover {
-            color: #1c92d2;
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Farmer's Helper</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .form-box {
+      background: linear-gradient(135deg, #fff 60%, #e8f5e9 100%);
+      padding: 2.8rem 2.2rem 2.2rem 2.2rem;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 12px 36px 0 rgba(44, 62, 80, 0.13);
+      border: 2.5px solid #81c784;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      margin-bottom: 2.5rem;
+    }
+    .form-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #388e3c;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .input-box {
+      margin-bottom: 1.5rem;
+    }
+    .input-box input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #c8e6c9;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s;
+    }
+    .input-box input:focus {
+      border-color: #43a047;
+      outline: none;
+    }
+    .btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(90deg, #43a047, #81c784);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #388e3c, #cddc39);
+      transform: translateY(-2px);
+    }
+    .register-link {
+      display: block;
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #388e3c;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .register-link:hover {
+      color: #1c92d2;
+      text-decoration: underline;
+    }
+    .firebase-error {
+      color: red;
+      font-size: 0.98rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-brand">
-            <i class="fas fa-leaf"></i>
-            <span class="brand-name">Farmer's Helper</span>
-        </div>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-            <a href="register.html" class="nav-link"><i class="fas fa-user-plus"></i> Register</a>
-        </div>
-    </nav>
-    <div class="main-container" style="display:flex;justify-content:center;align-items:center;min-height:100vh;width:100vw;">
-        <div class="form-box">
-            <form action="login.php" method="POST" autocomplete="on">
-                <div class="form-title">Login to Your Account</div>
-                <div class="input-box">
-                    <input type="text" name="username" placeholder="Username or Email" required autofocus>
-                </div>
-                <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
-                <a href="register.html" class="register-link">Don't have an account? Register</a>
-            </form>
-        </div>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <i class="fas fa-leaf"></i>
+      <span class="brand-name">Farmer's Helper</span>
     </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+      <a href="register.html" class="nav-link"><i class="fas fa-user-plus"></i> Register</a>
+    </div>
+  </nav>
+  <div class="main-container" style="display:flex;justify-content:center;align-items:center;min-height:100vh;width:100vw;">
+    <div class="form-box">
+      <form id="loginForm" autocomplete="on">
+        <div class="form-title">Login to Your Account</div>
+        <div class="firebase-error" id="loginError"></div>
+        <div class="input-box">
+          <input type="email" id="loginEmail" placeholder="Email" required autofocus>
+        </div>
+        <div class="input-box">
+          <input type="password" id="loginPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <a href="register.html" class="register-link">Don't have an account? Register</a>
+      </form>
+    </div>
+  </div>
+
+  <!-- === Firebase Auth Logic (ES Module) === -->
+  <script type="module">
+    // Import functions from Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    // Optional: import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+    
+    // Your Firebase configuration (replace with your actual config)
+    const firebaseConfig = {
+    apiKey: "AIzaSyCjW4ZVSRVTDYsqgtkYkHp83BZ07rzK09k",
+    authDomain: "farmers-helper-2acb9.firebaseapp.com",
+    projectId: "farmers-helper-2acb9",
+    storageBucket: "farmers-helper-2acb9.firebasestorage.app",
+    messagingSenderId: "793507374036",
+    appId: "1:793507374036:web:89cbc3da5fcb2f8ec6ec41",
+    measurementId: "G-HS8ZX0FRGD"
+  };
+
+    // Initialize Firebase & Auth
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Handle login form submit
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const errorDiv = document.getElementById("loginError");
+      errorDiv.style.display = "none";
+      errorDiv.textContent = "";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        // Login successful
+        alert("Login successful!");
+        window.location.href = "index.html"; // or wherever you want to redirect
+      } catch (error) {
+        errorDiv.textContent = "Login failed: " + error.message;
+        errorDiv.style.display = "block";
+      }
+    });
+  </script>
 </body>
-</html> 
+</html>
