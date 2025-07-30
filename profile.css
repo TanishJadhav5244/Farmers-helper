@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+  --primary: #4CAF50;
+  --primary-light: #81C784;
+  --primary-dark: #218838;
+  --secondary: #FFC107;
+  --secondary-dark: #FFA000;
+  --background: rgba(105, 249, 2, 0.283);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --text-dark: #000000;
+  --text-light: #ffffff;
+  --border: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.container {
+  background: var(--card-bg);
+  padding: 40px 30px;
+  border-radius: 15px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  width: 60px;
+  height: 3px;
+  background-color: var(--secondary);
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 3px;
+}
+
+#profileData {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+#profileData p {
+  margin: 15px 0;
+  color: var(--text-dark);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+#profileData strong {
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+#profileData span {
+  font-weight: 500;
+}
+
+/* Centered buttons */
+#profileData button {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  margin: 12px auto 0;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Edit Profile button */
+#profileData button:first-of-type {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+#profileData button:first-of-type:hover {
+  background-color: var(--primary);
+}
+
+/* Logout button - now yellow */
+#profileData button:last-of-type {
+  background-color: var(--secondary);
+  color: black;
+}
+
+#profileData button:last-of-type:hover {
+  background-color: var(--secondary-dark);
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  #profileData button {
+    width: 100%;
+  }
+}
+
+
+.container {
+    position: relative; /* Add this to anchor home icon inside */
+  }
+
+  .home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+  }
+
+  .home-button:hover {
+    background-color: var(--primary-dark);
+  }

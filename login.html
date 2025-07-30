@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="profile-icon.js"></script>
   <style>
     body {
       background: linear-gradient(120deg, #e8f5e9 0%, #c8e6c9 100%);
@@ -117,6 +118,9 @@
         <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Login</button>
         <a href="register.html" class="register-link">Don't have an account? Register</a>
       </form>
+      <button type="button" id="googleSignInBtn" class="btn" style="margin-top:1rem;">
+        <i class="fab fa-google"></i> Sign in with Google
+      </button>
     </div>
   </div>
 
@@ -124,7 +128,7 @@
   <script type="module">
     // Import functions from Firebase SDK
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
     // Optional: import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
     
     // Your Firebase configuration (replace with your actual config)
@@ -141,6 +145,7 @@
     // Initialize Firebase & Auth
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
     // Handle login form submit
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
@@ -159,6 +164,16 @@
       } catch (error) {
         errorDiv.textContent = "Login failed: " + error.message;
         errorDiv.style.display = "block";
+      }
+    });
+    // Google sign-in handler
+    document.getElementById("googleSignInBtn").addEventListener("click", async () => {
+      try {
+        await signInWithPopup(auth, provider);
+        alert("Google sign-in successful!");
+        window.location.href = "index.html";
+      } catch (error) {
+        alert("Google sign-in failed: " + error.message);
       }
     });
   </script>

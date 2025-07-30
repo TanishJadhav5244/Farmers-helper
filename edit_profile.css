@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --primary: #4CAF50;
+  --primary-light: #81C784;
+  --primary-dark: #218838;
+  --secondary: #FFC107;
+  --secondary-dark: #FFA000;
+  --background: rgba(105, 249, 2, 0.283);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --text-dark: #000000;
+  --text-medium: #222;
+  --text-light: #ffffff;
+  --border: #000000;
+  --danger: #f44336;
+  --danger-dark: #c62828;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 100vh;
+}
+
+.container {
+  background: var(--card-bg);
+  padding: 40px 35px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.logo {
+  width: 120px;
+  display: block;
+  margin: 0 auto 25px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--secondary);
+  border-radius: 3px;
+  margin: 10px auto 0;
+}
+
+form p {
+  margin-bottom: 18px;
+  font-weight: 500;
+  color: var(--text-medium);
+}
+
+/* Input + Dropdown shared styles */
+form input,
+form select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 6px;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Button Container */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+form button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Save Button */
+form button[type="submit"] {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+form button[type="submit"]:hover {
+  background-color: var(--primary);
+}
+
+/* Cancel Button */
+form button[type="button"] {
+  background-color: var(--danger);
+  color: white;
+}
+
+form button[type="button"]:hover {
+  background-color: var(--danger-dark);
+}
+
+/* Optional Yellow Logout Button Style (for reuse) */
+button.logout {
+  background-color: var(--secondary);
+  color: #000;
+}
+
+button.logout:hover {
+  background-color: var(--secondary-dark);
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 30px 25px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  form button {
+    width: 100%;
+  }
+}
+
+.home-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease;
+  }
+  
+  .home-button:hover {
+    background-color: var(--primary-dark);
+  }
+  

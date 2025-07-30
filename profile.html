@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Guard - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="profile.css" />
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="home-button" title="Go to Dashboard">🏠</a>
+        <a href="index.html" title="Go to Dashboard">
+            <img src="/static/image/greenguard_logo.png" alt="Logo" class="logo" />
+          </a>
+        <h2>🌿 Green Guard - Your Profile 🌿</h2>
+
+        <div id="profileData">
+            <p><strong>👤 Name:</strong> <span id="profile-name"></span></p>
+            <p><strong>📧 Email:</strong> <span id="profile-email"></span></p>
+            <p><strong>📱 Phone:</strong> <span id="profile-phone"></span></p>
+            <p><strong>🌍 State:</strong> <span id="profile-state"></span></p>
+            <p><strong>🏣 District:</strong> <span id="profile-district"></span></p>
+            <p><strong>🌾 Farmer Type:</strong> <span id="profile-farmerType"></span></p>
+            <button onclick="location.href='edit_profile.html'">✏️ Edit Profile</button>
+            <button onclick="logout()">🚪 Logout</button>
+        </div>
+    </div>
+
+    <script>
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCjW4ZVSRVTDYsqgtkYkHp83BZ07rzK09k",
+            authDomain: "farmers-helper-2acb9.firebaseapp.com",
+            projectId: "farmers-helper-2acb9"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        firebase.auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                const uid = user.uid;
+                try {
+                    const doc = await db.collection("users").doc(uid).get();
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById("profile-name").innerText = data.name || "";
+                        document.getElementById("profile-email").innerText = data.email || "";
+                        document.getElementById("profile-phone").innerText = data.phone || "";
+                        document.getElementById("profile-state").innerText = data.state || "";
+                        document.getElementById("profile-district").innerText = data.district || "";
+                        document.getElementById("profile-farmerType").innerText = data.farmerType || "";
+                    } else {
+                        alert("No user data found.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching profile:", error);
+                }
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        function logout() {
+            firebase.auth().signOut().then(() => {
+                window.location.href = "login.html";
+            });
+        }
+    </script>
+</body>
+
+</html>
