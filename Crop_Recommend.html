@@ -49,6 +49,22 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="temperatureInput">
+                    <i class="fas fa-thermometer-half"></i>
+                    Temperature (°C)
+                </label>
+                <input type="number" id="temperatureInput" class="modern-input" placeholder="Enter temperature" min="0" max="50">
+            </div>
+
+            <div class="form-group">
+                <label for="rainfallInput">
+                    <i class="fas fa-cloud-rain"></i>
+                    Rainfall (mm)
+                </label>
+                <input type="number" id="rainfallInput" class="modern-input" placeholder="Enter rainfall" min="0" max="2000">
+            </div>
+
             <button id="recommendButton" class="modern-btn">
                 <span>Get Recommendations</span>
                 <i class="fas fa-arrow-right"></i>
@@ -87,63 +103,136 @@
         </div>
     </div>
 
-    <script>
-        const soilTypes = ["Sandy", "Loamy", "Peaty", "Clay", "Silty"];
-        const weatherConditions = ["Sunny", "Rainy", "Stormy", "Cloudy"];
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script>
+    const soilDropdown = document.getElementById("soilDropdown");
+    const weatherDropdown = document.getElementById("weatherDropdown");
+    const temperatureInput = document.getElementById("temperatureInput");
+    const rainfallInput = document.getElementById("rainfallInput");
+    const resultDiv = document.getElementById("result");
+    const resultText = resultDiv.querySelector(".result-text");
 
-        const cropData = [
-            { soil: "Sandy", weather: "Sunny", crop: "Barley" },
-            { soil: "Loamy", weather: "Sunny", crop: "Corn" },
-            { soil: "Peaty", weather: "Rainy", crop: "Wheat" },
-            { soil: "Sandy", weather: "Sunny", crop: "Soybeans" },
-            { soil: "Clay", weather: "Stormy", crop: "Barley" }
-        ];
+    const soilTypes = ["Sandy", "Loamy", "Peaty", "Clay", "Silty"];
+    const weatherConditions = ["Sunny", "Rainy", "Stormy", "Cloudy"];
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const soilDropdown = document.getElementById("soilDropdown");
-            const weatherDropdown = document.getElementById("weatherDropdown");
-            const resultDiv = document.getElementById("result");
-            const resultText = resultDiv.querySelector(".result-text");
+    // Populate dropdowns
+    soilTypes.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        soilDropdown.appendChild(option);
+    });
 
-            soilTypes.forEach(type => {
-                let option = document.createElement("option");
-                option.value = type;
-                option.textContent = type;
-                soilDropdown.appendChild(option);
+    weatherConditions.forEach(condition => {
+        const option = document.createElement("option");
+        option.value = condition;
+        option.textContent = condition;
+        weatherDropdown.appendChild(option);
+    });
+
+    let cropDataFromCSV = [];
+
+    // Load CSV using PapaParse
+    Papa.parse("crop_yield_dataset.csv", {
+        download: true,
+        header: true,
+        complete: function(results) {
+            cropDataFromCSV = results.data;
+            console.log("CSV Loaded:", cropDataFromCSV);
+        },
+        error: function(err) {
+            console.error("Error loading CSV:", err);
+        }
+    });
+
+    // On click: filter crop data
+    document.getElementById("recommendButton").addEventListener("click", function () {
+        const selectedSoil = soilDropdown.value;
+        const selectedWeather = weatherDropdown.value;
+        const temperature = parseFloat(temperatureInput.value);
+        const rainfall = parseFloat(rainfallInput.value);
+
+        if (!selectedSoil || !selectedWeather) {
+            resultText.textContent = "Please select both soil type and weather condition";
+            resultDiv.classList.add("error");
+            resultDiv.classList.remove("success");
+            return;
+        }
+
+        // Filter based on soil type and weather condition
+        let matches = cropDataFromCSV.filter(entry =>
+            entry['Soil Type']?.toLowerCase() === selectedSoil.toLowerCase() &&
+            entry['Weather Condition']?.toLowerCase() === selectedWeather.toLowerCase()
+        );
+
+        // If temperature is provided, filter by temperature range (±5°C)
+        if (!isNaN(temperature)) {
+            matches = matches.filter(entry => {
+                const entryTemp = parseFloat(entry['Temperature (°C)']);
+                return entryTemp >= temperature - 5 && entryTemp <= temperature + 5;
             });
+        }
 
-            weatherConditions.forEach(condition => {
-                let option = document.createElement("option");
-                option.value = condition;
-                option.textContent = condition;
-                weatherDropdown.appendChild(option);
+        // If rainfall is provided, filter by rainfall range (±100mm)
+        if (!isNaN(rainfall)) {
+            matches = matches.filter(entry => {
+                const entryRainfall = parseFloat(entry['Rainfall (mm)']);
+                return entryRainfall >= rainfall - 100 && entryRainfall <= rainfall + 100;
             });
+        }
 
-            document.getElementById("recommendButton").addEventListener("click", function () {
-                let selectedSoil = soilDropdown.value;
-                let selectedWeather = weatherDropdown.value;
-                
-                if (!selectedSoil || !selectedWeather) {
-                    resultText.textContent = "Please select both soil type and weather condition";
-                    resultDiv.classList.add("error");
-                    return;
+        if (matches.length > 0) {
+            // Get unique crops and their average yields
+            const cropStats = {};
+            matches.forEach(entry => {
+                const crop = entry['Crop Type'];
+                const yield = parseFloat(entry['Yield (tons/hectare)']);
+                if (!cropStats[crop]) {
+                    cropStats[crop] = {
+                        count: 0,
+                        totalYield: 0,
+                        avgYield: 0
+                    };
                 }
-
-                let recommendedCrops = cropData.filter(entry => 
-                    entry.soil === selectedSoil && entry.weather === selectedWeather
-                ).map(entry => entry.crop);
-
-                if (recommendedCrops.length > 0) {
-                    resultText.textContent = `Recommended Crops: ${recommendedCrops.join(", ")}`;
-                    resultDiv.classList.remove("error");
-                    resultDiv.classList.add("success");
-                } else {
-                    resultText.textContent = "No matching crops found for the selected conditions";
-                    resultDiv.classList.remove("success");
-                    resultDiv.classList.add("error");
-                }
+                cropStats[crop].count++;
+                cropStats[crop].totalYield += yield;
             });
-        });
-    </script>
+
+            // Calculate average yields
+            Object.keys(cropStats).forEach(crop => {
+                cropStats[crop].avgYield = (cropStats[crop].totalYield / cropStats[crop].count).toFixed(2);
+            });
+
+            // Sort crops by average yield (highest first)
+            const sortedCrops = Object.keys(cropStats).sort((a, b) => 
+                cropStats[b].avgYield - cropStats[a].avgYield
+            );
+
+            // Create detailed recommendation
+            let recommendation = `Recommended Crops for ${selectedSoil} soil in ${selectedWeather} weather`;
+            if (!isNaN(temperature)) {
+                recommendation += ` (Temperature: ${temperature}°C)`;
+            }
+            if (!isNaN(rainfall)) {
+                recommendation += ` (Rainfall: ${rainfall}mm)`;
+            }
+            recommendation += `:\n\n`;
+            sortedCrops.forEach((crop, index) => {
+                const avgYield = cropStats[crop].avgYield;
+                const count = cropStats[crop].count;
+                recommendation += `${index + 1}. ${crop} - Avg Yield: ${avgYield} tons/hectare (${count} data points)\n`;
+            });
+
+            resultText.innerHTML = recommendation.replace(/\n/g, '<br>');
+            resultDiv.classList.add("success");
+            resultDiv.classList.remove("error");
+        } else {
+            resultText.textContent = "No matching crops found for the selected conditions";
+            resultDiv.classList.add("error");
+            resultDiv.classList.remove("success");
+        }
+    });
+</script>
+
 </body>
 </html>
