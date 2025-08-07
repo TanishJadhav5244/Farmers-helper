@@ -1,110 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Crop Disease Info</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .product-card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .product-img img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .product-content {
-      padding: 1rem;
-    }
-
-    .product-category {
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    .product-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin: 0.5rem 0;
-    }
-
-    .symptoms, .fert, .insect {
-      margin-top: 0.3rem;
-      font-size: 0.9rem;
-      color: #333;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Identification</title>
+    <link rel="stylesheet" href="crop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <div class="section-title">
-    <h2>Crop Disease Identification</h2>
-    <p>Learn about common crop diseases and how to treat them.</p>
-  </div>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-leaf"></i>
+            <span class="brand-name">Farmer's Helper</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+            <a href="seeds.html" class="nav-link"><i class="fas fa-store"></i> Market</a>
+        </div>
+    </nav>
 
-  <div class="products-grid" id="disease-grid">
-    <!-- JS will populate cards here -->
-  </div>
+    <div class="container">
+        <div class="recommendation-card">
+            <div class="card-header">
+                <i class="fas fa-bug"></i>
+                <h1>Crop Disease Identification</h1>
+                <p>Learn about common crop diseases and how to treat them with recommended fertilizers and insecticides</p>
+            </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script>
-    Papa.parse("crop_disease_updated_images.csv", {
-      download: true,
-      header: true,
-      complete: function(results) {
-        const data = results.data;
-        const grid = document.getElementById("disease-grid");
+            <div id="disease-grid" class="disease-grid">
+                <!-- JS will populate cards here -->
+            </div>
+        </div>
+    </div>
 
-        data.forEach(item => {
-          const card = document.createElement("div");
-          card.className = "product-card";
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script>
+        Papa.parse("crop_disease_updated_images.csv", {
+            download: true,
+            header: true,
+            complete: function(results) {
+                const data = results.data;
+                const grid = document.getElementById("disease-grid");
 
-          const imgDiv = document.createElement("div");
-          imgDiv.className = "product-img";
-          imgDiv.innerHTML = `<img src="${item.image_url}" alt="${item.disease_name}" />`;
-          card.appendChild(imgDiv);
+                data.forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "disease-card";
 
-          const content = document.createElement("div");
-          content.className = "product-content";
-          content.innerHTML = `
-            <div class="product-category">${item.crop_name}</div>
-            <h3 class="product-title">${item.disease_name}</h3>
-            <div class="symptoms"><strong>Symptoms:</strong> ${item.symptoms}</div>
-            <div class="fert"><strong>Fertilizers:</strong> ${item.recommended_fertilizers}</div>
-            <div class="insect"><strong>Insecticides:</strong> ${item.recommended_insecticides}</div>
-          `;
-          card.appendChild(content);
-          grid.appendChild(card);
+                    const imgDiv = document.createElement("div");
+                    imgDiv.className = "disease-img";
+                    imgDiv.innerHTML = `<img src="${item.image_url}" alt="${item.disease_name}" />`;
+                    card.appendChild(imgDiv);
+
+                    const content = document.createElement("div");
+                    content.className = "disease-content";
+                    content.innerHTML = `
+                        <div class="disease-category">${item.crop_name}</div>
+                        <h3 class="disease-title">${item.disease_name}</h3>
+                        <div class="disease-info">
+                            <div class="symptoms">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Symptoms:</strong> ${item.symptoms}
+                            </div>
+                            <div class="fertilizers">
+                                <i class="fas fa-seedling"></i>
+                                <strong>Fertilizers:</strong> ${item.recommended_fertilizers}
+                            </div>
+                            <div class="insecticides">
+                                <i class="fas fa-spray-can"></i>
+                                <strong>Insecticides:</strong> ${item.recommended_insecticides}
+                            </div>
+                        </div>
+                    `;
+                    card.appendChild(content);
+                    grid.appendChild(card);
+                });
+            },
+            error: function(err) {
+                console.error("Error loading CSV:", err);
+                const grid = document.getElementById("disease-grid");
+                grid.innerHTML = '<p class="error-message">Error loading disease data. Please try again later.</p>';
+            }
         });
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>

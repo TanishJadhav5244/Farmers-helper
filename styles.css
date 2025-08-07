@@ -225,6 +225,10 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 350px;
 }
 
 .feature-card::before {
@@ -273,6 +277,7 @@ body {
 .feature-card p {
     color: var(--text-color);
     margin-bottom: 1.5rem;
+    flex-grow: 1;
 }
 
 .modern-btn {
@@ -288,6 +293,8 @@ body {
     gap: 0.8rem;
     font-size: 1rem;
     font-weight: 500;
+    margin-top: auto;
+    align-self: center;
 }
 
 .modern-btn:hover {
@@ -485,6 +492,7 @@ body {
 
     .feature-card {
         padding: 2rem;
+        min-height: 320px;
     }
 }
 

@@ -1,0 +1,337 @@
+Crop Name,Demand Month,Importing Country,Export Quantity (Tonnes)
+Basmati Rice,January,Saudi Arabia,85000
+Basmati Rice,February,United Arab Emirates,92000
+Basmati Rice,March,Iraq,78000
+Basmati Rice,April,Kuwait,65000
+Basmati Rice,May,Yemen,45000
+Basmati Rice,June,Oman,52000
+Non-Basmati Rice,July,South Africa,125000
+Non-Basmati Rice,August,Nepal,110000
+Non-Basmati Rice,September,Bangladesh,98000
+Non-Basmati Rice,October,Malaysia,75000
+Non-Basmati Rice,November,Iran,68000
+Non-Basmati Rice,December,Sri Lanka,82000
+Wheat,January,Bangladesh,95000
+Wheat,February,Nepal,87000
+Wheat,March,Sri Lanka,65000
+Wheat,April,Afghanistan,72000
+Wheat,May,United Arab Emirates,58000
+Wheat,June,Oman,49000
+Maize,July,Bangladesh,55000
+Maize,August,Vietnam,48000
+Maize,September,Malaysia,42000
+Maize,October,Nepal,37000
+Maize,November,Sri Lanka,31000
+Maize,December,Bhutan,25000
+Sugar,January,Afghanistan,68000
+Sugar,February,Sudan,52000
+Sugar,March,Sri Lanka,45000
+Sugar,April,Egypt,57000
+Sugar,May,Iran,63000
+Sugar,June,Yemen,41000
+Cotton,January,China,145000
+Cotton,February,Bangladesh,92000
+Cotton,March,Vietnam,78000
+Cotton,April,Pakistan,65000
+Cotton,May,Turkey,58000
+Cotton,June,Indonesia,52000
+Mango,April,United States,32000
+Mango,May,Saudi Arabia,28000
+Mango,June,United Arab Emirates,24000
+Mango,July,Oman,19000
+Mango,August,Kuwait,15000
+Mango,September,Qatar,12000
+Banana,January,Iran,18000
+Banana,February,Oman,15000
+Banana,March,Saudi Arabia,17000
+Banana,April,United Arab Emirates,19000
+Banana,May,Qatar,14000
+Banana,June,Bahrain,11000
+Grapes,January,United Kingdom,22000
+Grapes,February,Netherlands,24000
+Grapes,March,Germany,21000
+Grapes,April,Russia,19000
+Grapes,May,France,17000
+Grapes,June,Canada,15000
+Onion,January,Bangladesh,75000
+Onion,February,Sri Lanka,68000
+Onion,March,Malaysia,52000
+Onion,April,United Arab Emirates,45000
+Onion,May,Nepal,38000
+Onion,June,Bhutan,29000
+Potato,January,Nepal,42000
+Potato,February,Bhutan,35000
+Potato,March,Sri Lanka,39000
+Potato,April,Bangladesh,45000
+Potato,May,Oman,31000
+Potato,June,Qatar,26000
+Tea,January,Russia,48000
+Tea,February,Iran,52000
+Tea,March,United Arab Emirates,45000
+Tea,April,Kazakhstan,38000
+Tea,May,United Kingdom,41000
+Tea,June,Germany,36000
+Coffee,January,Italy,28000
+Coffee,February,Germany,31000
+Coffee,March,Russia,25000
+Coffee,April,Belgium,22000
+Coffee,May,Spain,19000
+Coffee,June,United States,24000
+Spices,January,United States,45000
+Spices,February,United Arab Emirates,52000
+Spices,March,Sri Lanka,38000
+Spices,April,Bangladesh,42000
+Spices,May,Pakistan,36000
+Spices,June,Nepal,29000
+Groundnut,January,Indonesia,25000
+Groundnut,February,Vietnam,22000
+Groundnut,March,Philippines,19000
+Groundnut,April,Malaysia,17000
+Groundnut,May,Thailand,15000
+Groundnut,June,Sri Lanka,13000
+Soybean,January,Bangladesh,32000
+Soybean,February,Vietnam,28000
+Soybean,March,Thailand,24000
+Soybean,April,Nepal,19000
+Soybean,May,Bhutan,15000
+Soybean,June,Sri Lanka,18000
+Sunflower Oil,January,Iran,42000
+Sunflower Oil,February,Turkey,38000
+Sunflower Oil,March,Saudi Arabia,35000
+Sunflower Oil,April,United Arab Emirates,31000
+Sunflower Oil,May,Iraq,29000
+Sunflower Oil,June,Yemen,23000
+Mustard Seed,January,Bangladesh,28000
+Mustard Seed,February,Nepal,24000
+Mustard Seed,March,Sri Lanka,21000
+Mustard Seed,April,Bhutan,18000
+Mustard Seed,May,United Arab Emirates,15000
+Mustard Seed,June,Oman,12000
+Pulses,January,Turkey,35000
+Pulses,February,Egypt,31000
+Pulses,March,China,39000
+Pulses,April,Algeria,28000
+Pulses,May,Sri Lanka,23000
+Pulses,June,Bangladesh,26000
+Fresh Vegetables,January,United Arab Emirates,45000
+Fresh Vegetables,February,Saudi Arabia,52000
+Fresh Vegetables,March,Oman,38000
+Fresh Vegetables,April,Qatar,31000
+Fresh Vegetables,May,Kuwait,27000
+Fresh Vegetables,June,Bahrain,23000
+Cashew,January,United States,38000
+Cashew,February,Netherlands,35000
+Cashew,March,United Kingdom,32000
+Cashew,April,France,29000
+Cashew,May,Germany,26000
+Cashew,June,Italy,23000
+Tobacco,January,United Arab Emirates,25000
+Tobacco,February,Yemen,19000
+Tobacco,March,Saudi Arabia,21000
+Tobacco,April,Egypt,18000
+Tobacco,May,Sudan,15000
+Tobacco,June,Iraq,17000
+Guava,July,United Arab Emirates,12000
+Guava,August,Saudi Arabia,15000
+Guava,September,Oman,11000
+Guava,October,Qatar,9000
+Guava,November,Kuwait,7000
+Guava,December,Bahrain,6000
+Turmeric,January,Iran,22000
+Turmeric,February,United States,19000
+Turmeric,March,Bangladesh,17000
+Turmeric,April,United Arab Emirates,15000
+Turmeric,May,Sri Lanka,13000
+Turmeric,June,United Kingdom,11000
+Cardamom,January,Saudi Arabia,9000
+Cardamom,February,United States,8500
+Cardamom,March,United Arab Emirates,7500
+Cardamom,April,Kuwait,6500
+Cardamom,May,Oman,5500
+Cardamom,June,Qatar,4500
+Black Pepper,January,United States,15000
+Black Pepper,February,Russia,13000
+Black Pepper,March,United Arab Emirates,11000
+Black Pepper,April,Vietnam,9000
+Black Pepper,May,Germany,8000
+Black Pepper,June,United Kingdom,7000
+Cumin,January,United States,18000
+Cumin,February,Brazil,15000
+Cumin,March,Bangladesh,13000
+Cumin,April,United Arab Emirates,11000
+Cumin,May,Iran,9000
+Cumin,June,Vietnam,8000
+Coriander,January,Bangladesh,12000
+Coriander,February,Sri Lanka,10000
+Coriander,March,Nepal,9000
+Coriander,April,United Arab Emirates,8000
+Coriander,May,Oman,7000
+Coriander,June,Qatar,6000
+Chilies,January,Bangladesh,25000
+Chilies,February,Sri Lanka,22000
+Chilies,March,Malaysia,19000
+Chilies,April,Saudi Arabia,17000
+Chilies,May,United Arab Emirates,15000
+Chilies,June,United States,13000
+Garlic,January,Bangladesh,32000
+Garlic,February,Sri Lanka,28000
+Garlic,March,Malaysia,24000
+Garlic,April,United Arab Emirates,21000
+Garlic,May,Oman,18000
+Garlic,June,Iran,15000
+Ginger,January,Bangladesh,18000
+Ginger,February,Nepal,15000
+Ginger,March,Sri Lanka,13000
+Ginger,April,United Arab Emirates,11000
+Ginger,May,Oman,9000
+Ginger,June,Qatar,7000
+Tomato,January,Bangladesh,45000
+Tomato,February,Nepal,38000
+Tomato,March,Sri Lanka,32000
+Tomato,April,United Arab Emirates,28000
+Tomato,May,Oman,24000
+Tomato,June,Qatar,20000
+Brinjal,January,Bangladesh,22000
+Brinjal,February,Nepal,19000
+Brinjal,March,Sri Lanka,17000
+Brinjal,April,Oman,15000
+Brinjal,May,Qatar,13000
+Brinjal,June,Bahrain,11000
+Cauliflower,January,Bangladesh,18000
+Cauliflower,February,Nepal,15000
+Cauliflower,March,Sri Lanka,13000
+Cauliflower,April,United Arab Emirates,11000
+Cauliflower,May,Oman,9000
+Cauliflower,June,Qatar,7000
+Cabbage,January,Bangladesh,25000
+Cabbage,February,Nepal,22000
+Cabbage,March,Sri Lanka,19000
+Cabbage,April,Oman,17000
+Cabbage,May,Qatar,14000
+Cabbage,June,Bahrain,12000
+Okra,January,Saudi Arabia,15000
+Okra,February,United Arab Emirates,13000
+Okra,March,Oman,11000
+Okra,April,Qatar,9000
+Okra,May,Kuwait,7000
+Okra,June,Bahrain,6000
+Peas,January,Bangladesh,28000
+Peas,February,Nepal,24000
+Peas,March,Sri Lanka,21000
+Peas,April,United Arab Emirates,18000
+Peas,May,Oman,15000
+Peas,June,Qatar,12000
+Beans,January,Bangladesh,23000
+Beans,February,Nepal,19000
+Beans,March,Sri Lanka,17000
+Beans,April,Oman,15000
+Beans,May,Qatar,13000
+Beans,June,Bahrain,11000
+Bitter Gourd,January,Bangladesh,12000
+Bitter Gourd,February,Nepal,10000
+Bitter Gourd,March,Sri Lanka,9000
+Bitter Gourd,April,United Arab Emirates,7000
+Bitter Gourd,May,Oman,6000
+Bitter Gourd,June,Qatar,5000
+Pumpkin,January,Bangladesh,18000
+Pumpkin,February,Nepal,15000
+Pumpkin,March,Sri Lanka,13000
+Pumpkin,April,Oman,11000
+Pumpkin,May,Qatar,9000
+Pumpkin,June,Bahrain,7000
+Cucumber,January,Saudi Arabia,22000
+Cucumber,February,United Arab Emirates,19000
+Cucumber,March,Oman,17000
+Cucumber,April,Qatar,14000
+Cucumber,May,Kuwait,12000
+Cucumber,June,Bahrain,10000
+Carrot,January,Bangladesh,25000
+Carrot,February,Nepal,22000
+Carrot,March,Sri Lanka,19000
+Carrot,April,Oman,17000
+Carrot,May,Qatar,15000
+Carrot,June,Bahrain,13000
+Radish,January,Bangladesh,12000
+Radish,February,Nepal,10000
+Radish,March,Sri Lanka,9000
+Radish,April,Oman,7000
+Radish,May,Qatar,6000
+Radish,June,Bahrain,5000
+Beetroot,January,Saudi Arabia,8000
+Beetroot,February,United Arab Emirates,7000
+Beetroot,March,Oman,6000
+Beetroot,April,Qatar,5000
+Beetroot,May,Kuwait,4000
+Beetroot,June,Bahrain,3000
+Sweet Potato,January,Bangladesh,15000
+Sweet Potato,February,Nepal,13000
+Sweet Potato,March,Sri Lanka,11000
+Sweet Potato,April,United Arab Emirates,9000
+Sweet Potato,May,Oman,7000
+Sweet Potato,June,Qatar,6000
+Yam,January,Bangladesh,10000
+Yam,February,Nepal,8000
+Yam,March,Sri Lanka,7000
+Yam,April,Oman,6000
+Yam,May,Qatar,5000
+Yam,June,Bahrain,4000
+Jackfruit,January,United Arab Emirates,9000
+Jackfruit,February,Saudi Arabia,8000
+Jackfruit,March,Oman,7000
+Jackfruit,April,Qatar,6000
+Jackfruit,May,Kuwait,5000
+Jackfruit,June,Bahrain,4000
+Pomegranate,January,United Arab Emirates,12000
+Pomegranate,February,Saudi Arabia,11000
+Pomegranate,March,Oman,10000
+Pomegranate,April,Qatar,9000
+Pomegranate,May,Kuwait,8000
+Pomegranate,June,Bahrain,7000
+Papaya,January,Saudi Arabia,11000
+Papaya,February,United Arab Emirates,10000
+Papaya,March,Oman,9000
+Papaya,April,Qatar,8000
+Papaya,May,Kuwait,7000
+Papaya,June,Bahrain,6000
+Strawberry,January,United Arab Emirates,5000
+Strawberry,February,Oman,4000
+Strawberry,March,Qatar,3500
+Strawberry,April,Kuwait,3000
+Strawberry,May,Bahrain,2500
+Strawberry,June,Saudi Arabia,2000
+Lychee,May,United Arab Emirates,3000
+Lychee,June,Saudi Arabia,2500
+Lychee,July,Oman,2000
+Lychee,August,Qatar,1800
+Lychee,September,Kuwait,1500
+Lychee,October,Bahrain,1200
+Pineapple,April,United Arab Emirates,8000
+Pineapple,May,Saudi Arabia,7000
+Pineapple,June,Oman,6000
+Pineapple,July,Qatar,5000
+Pineapple,August,Kuwait,4000
+Pineapple,September,Bahrain,3500
+Apple,January,Bangladesh,12000
+Apple,February,Nepal,10000
+Apple,March,Sri Lanka,9000
+Apple,April,United Arab Emirates,8000
+Apple,May,Oman,7000
+Apple,June,Qatar,6000
+Pear,January,United Arab Emirates,5000
+Pear,February,Saudi Arabia,4500
+Pear,March,Oman,4000
+Pear,April,Qatar,3500
+Pear,May,Kuwait,3000
+Pear,June,Bahrain,2500
+Peach,February,Saudi Arabia,2000
+Peach,March,United Arab Emirates,1800
+Peach,April,Oman,1600
+Peach,May,Qatar,1400
+Peach,June,Kuwait,1200
+Peach,July,Bahrain,1000
+Mushroom,January,United Arab Emirates,3000
+Mushroom,February,Saudi Arabia,2500
+Mushroom,March,Oman,2000
+Mushroom,April,Qatar,1800
+Mushroom,May,Kuwait,1500
+Mushroom,June,Bahrain,1200

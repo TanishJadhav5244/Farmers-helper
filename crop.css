@@ -316,3 +316,114 @@ label i {
 .recommendation-card, .soil-info-card {
     animation: fadeIn 0.5s ease-out forwards;
 }
+
+/* Disease Grid and Cards */
+.disease-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.disease-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.disease-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.disease-img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.disease-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.disease-card:hover .disease-img img {
+    transform: scale(1.05);
+}
+
+.disease-content {
+    padding: 1.5rem;
+}
+
+.disease-category {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.disease-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.disease-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.disease-info > div {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.disease-info i {
+    color: var(--primary-color);
+    margin-top: 0.2rem;
+    min-width: 16px;
+}
+
+.disease-info strong {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.error-message {
+    text-align: center;
+    color: #f44336;
+    font-size: 1.1rem;
+    padding: 2rem;
+    background: rgba(244, 67, 54, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #f44336;
+}
+
+/* Responsive adjustments for disease cards */
+@media (max-width: 768px) {
+    .disease-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .disease-content {
+        padding: 1rem;
+    }
+    
+    .disease-title {
+        font-size: 1.2rem;
+    }
+}

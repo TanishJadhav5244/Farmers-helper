@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demanded Crops - Market Analysis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #2E7D32;
+            --light: #F1F8E9;
+            --soil: #5D4037;
+            --sale: #E53935;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f7;
+            color: #333;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        /* Highlight active nav item */
+        nav ul li a.active {
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(46, 125, 50, 0.8)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 1rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ffffff, #f0f8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.5);
+            }
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.6);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 3rem 1rem;
+            background-color: #f9f9f7;
+        }
+        
+        /* Enhanced Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Enhanced Product Cards */
+        .product-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, var(--sale), #ff6b6b);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(229, 57, 53, 0.3);
+        }
+        
+        .product-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+        
+        .quick-view {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover .quick-view {
+            bottom: 0;
+        }
+        
+        .product-content {
+            padding: 2rem;
+        }
+        
+        .product-category {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            display: block;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            height: auto;
+            line-height: 1.4;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .soil-info {
+            color: #af1616;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            background: rgba(175, 22, 22, 0.1);
+            padding: 0.5rem;
+            border-radius: 8px;
+            border-left: 3px solid #af1616;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 10px;
+        }
+        
+        .current-price {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+        }
+        
+        .discount {
+            color: var(--sale);
+            font-weight: bold;
+            background: rgba(229, 57, 53, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .add-to-cart {
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-grow: 1;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .add-to-cart:hover {
+            background: linear-gradient(45deg, var(--dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .wishlist {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .wishlist:hover, .wishlist.active {
+            color: var(--sale);
+        }
+        
+        /* Filter Section */
+        .filters {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--light);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Loading Placeholder */
+        .loading-placeholder {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+        }
+        
+        .loading-placeholder i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .loading-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .loading-placeholder p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="/static/image/greenguard_logo.png" alt="Green Sathi Logo">
+                <div class="logo-text">
+                    <h1>Demanded<span>Crops</span></h1>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="seeds.html"><i class="fas fa-seedling"></i> Seeds</a></li>
+                    <li><a href="demandedcrop.html" class="active"><i class="fas fa-chart-line"></i> Market Analysis</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Export Market Analysis</h1>
+            <p>Discover the most demanded crops in international markets and make informed decisions for your farming business</p>
+            <a href="#products" class="btn btn-primary">View Export Data</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Export Market Trends</h2>
+            <p>Real-time data on crop export demand and international market trends</p>
+        </div>
+        
+        <!-- Filter Section -->
+        <div class="filters">
+            <div class="filter-group">
+                <h3>Search & Filter:</h3>
+                <div style="margin-bottom: 1rem;">
+                    <input type="text" id="search-input" placeholder="Search by crop name, importing country, or demand month..." 
+                           style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                </div>
+            </div>
+            <div class="filter-group">
+                <h3>Filter by Crop Type:</h3>
+                <div class="filter-options" id="crop-filters">
+                    <button class="filter-btn active" data-crop="all">All Crops</button>
+                    <button class="filter-btn" data-crop="Basmati Rice">Basmati Rice</button>
+                    <button class="filter-btn" data-crop="Non-Basmati Rice">Non-Basmati Rice</button>
+                    <button class="filter-btn" data-crop="Wheat">Wheat</button>
+                    <button class="filter-btn" data-crop="Maize">Maize</button>
+                    <button class="filter-btn" data-crop="Sugar">Sugar</button>
+                    <button class="filter-btn" data-crop="Cotton">Cotton</button>
+                    <button class="filter-btn" data-crop="Mango">Mango</button>
+                    <button class="filter-btn" data-crop="Banana">Banana</button>
+                    <button class="filter-btn" data-crop="Grapes">Grapes</button>
+                    <button class="filter-btn" data-crop="Onion">Onion</button>
+                    <button class="filter-btn" data-crop="Potato">Potato</button>
+                    <button class="filter-btn" data-crop="Tea">Tea</button>
+                    <button class="filter-btn" data-crop="Coffee">Coffee</button>
+                    <button class="filter-btn" data-crop="Spices">Spices</button>
+                    <button class="filter-btn" data-crop="Groundnut">Groundnut</button>
+                    <button class="filter-btn" data-crop="Soybean">Soybean</button>
+                    <button class="filter-btn" data-crop="Sunflower Oil">Sunflower Oil</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <h3>Sort by:</h3>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-sort="quantity">Export Quantity (High to Low)</button>
+                    <button class="filter-btn" data-sort="crop">Crop Name</button>
+                    <button class="filter-btn" data-sort="country">Importing Country</button>
+                    <button class="filter-btn" data-sort="month">Demand Month</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Placeholder -->
+        <div class="loading-placeholder" id="loading-placeholder">
+            <i class="fas fa-chart-line"></i>
+            <h3>Loading Export Data...</h3>
+            <p>Please wait while we fetch the latest crop export and international market demand information.</p>
+        </div>
+        
+        <!-- Products Grid - This will be populated with CSV data -->
+        <div class="products-grid" id="market-data-grid">
+            <!-- CSV data will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script>
+        // Simple mobile menu toggle functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            if (nav.style.display === 'flex') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'flex';
+            }
+        });
+        
+        // CSV Data Loading and Processing
+        let cropData = [];
+        let filteredData = [];
+        let currentFilter = 'all';
+        let currentSort = 'quantity';
+        let searchTerm = '';
+        let itemsToShow = 20;
+        
+        // Function to process and display data
+        function processAndDisplayData() {
+            // Hide loading placeholder
+            document.getElementById('loading-placeholder').style.display = 'none';
+            
+            if (!cropData || cropData.length === 0) {
+                document.getElementById('market-data-grid').innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>No Data Available</h3>
+                        <p>No crop export data found. Please check the CSV file.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Filter data
+            let tempFiltered = currentFilter === 'all' 
+                ? cropData 
+                : cropData.filter(item => item['Crop Name'] === currentFilter);
+            
+            // Apply search filter
+            if (searchTerm.trim()) {
+                const searchLower = searchTerm.toLowerCase();
+                tempFiltered = tempFiltered.filter(item => 
+                    item['Crop Name'].toLowerCase().includes(searchLower) ||
+                    item['Importing Country'].toLowerCase().includes(searchLower) ||
+                    item['Demand Month'].toLowerCase().includes(searchLower)
+                );
+            }
+            
+            filteredData = tempFiltered;
+            
+            // Reset items to show when filters change
+            itemsToShow = 20;
+            
+            // Sort data
+            sortData();
+            
+            // Display data
+            displayData();
+        }
+        
+        // Function to sort data
+        function sortData() {
+            switch(currentSort) {
+                case 'quantity':
+                    filteredData.sort((a, b) => {
+                        const aVal = parseFloat(a['Export Quantity (Tonnes)']) || 0;
+                        const bVal = parseFloat(b['Export Quantity (Tonnes)']) || 0;
+                        return bVal - aVal;
+                    });
+                    break;
+                case 'crop':
+                    filteredData.sort((a, b) => a['Crop Name'].localeCompare(b['Crop Name']));
+                    break;
+                case 'country':
+                    filteredData.sort((a, b) => a['Importing Country'].localeCompare(b['Importing Country']));
+                    break;
+                case 'month':
+                    const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    filteredData.sort((a, b) => {
+                        const aIndex = monthOrder.indexOf(a['Demand Month']);
+                        const bIndex = monthOrder.indexOf(b['Demand Month']);
+                        return aIndex - bIndex;
+                    });
+                    break;
+            }
+        }
+        
+        // Function to display data
+        function displayData() {
+            const grid = document.getElementById('market-data-grid');
+            grid.innerHTML = '';
+            
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
+                        <i class="fas fa-search" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>No Results Found</h3>
+                        <p>Try adjusting your search terms or filters to find what you're looking for.</p>
+                        ${searchTerm ? `<p><strong>Search term:</strong> "${searchTerm}"</p>` : ''}
+                    </div>
+                `;
+                return;
+            }
+            
+            // Take items for display
+            const displayData = filteredData.slice(0, itemsToShow);
+            
+            displayData.forEach((item, index) => {
+                const card = createProductCard(item, index);
+                grid.appendChild(card);
+            });
+            
+            // Add summary statistics
+            addSummaryStatistics();
+            
+            // Add load more button if there are more items
+            if (filteredData.length > itemsToShow) {
+                const loadMoreDiv = document.createElement('div');
+                loadMoreDiv.style.gridColumn = '1 / -1';
+                loadMoreDiv.style.textAlign = 'center';
+                loadMoreDiv.style.marginTop = '2rem';
+                
+                loadMoreDiv.innerHTML = `
+                    <button onclick="loadMore()" style="
+                        padding: 1rem 2rem; 
+                        background: linear-gradient(45deg, var(--primary), var(--dark)); 
+                        color: white; 
+                        border: none; 
+                        border-radius: 25px; 
+                        cursor: pointer; 
+                        font-weight: 600;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        Load More (${filteredData.length - itemsToShow} more items)
+                    </button>
+                `;
+                
+                grid.appendChild(loadMoreDiv);
+            }
+        }
+        
+        // Function to create product card
+        function createProductCard(item, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            // Calculate demand score based on export quantity
+            const quantity = parseFloat(item['Export Quantity (Tonnes)']) || 0;
+            const demandScore = Math.min(100, Math.round((quantity / 150000) * 100));
+            const isHighDemand = demandScore > 70;
+            
+            card.innerHTML = `
+                ${isHighDemand ? '<div class="product-badge">High Demand</div>' : ''}
+                <div class="product-img">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4CAF50, #2E7D32); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="quick-view">View Details</div>
+                </div>
+                <div class="product-content">
+                    <span class="product-category">${item['Demand Month']}</span>
+                    <h3 class="product-title">${item['Crop Name']}</h3>
+                    <div class="soil-info">
+                        <strong>Importing Country:</strong> ${item['Importing Country']}<br>
+                        <strong>Export Quantity:</strong> ${quantity.toLocaleString()} Tonnes<br>
+                        <strong>Demand Level:</strong> ${demandScore > 70 ? 'High' : demandScore > 40 ? 'Moderate' : 'Low'}
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">${quantity.toLocaleString()} Tonnes</span>
+                        <span class="discount">Demand: ${demandScore}%</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="viewDetails('${item['Crop Name']}', ${quantity}, '${item['Importing Country']}', '${item['Demand Month']}')">
+                            View Export Analysis
+                        </button>
+                        <button class="wishlist" onclick="toggleWishlist(this)">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Function to add summary statistics
+        function addSummaryStatistics() {
+            const grid = document.getElementById('market-data-grid');
+            const summaryDiv = document.createElement('div');
+            summaryDiv.style.gridColumn = '1 / -1';
+            summaryDiv.style.background = 'linear-gradient(145deg, #ffffff, #f8f9fa)';
+            summaryDiv.style.borderRadius = '20px';
+            summaryDiv.style.padding = '2rem';
+            summaryDiv.style.marginTop = '2rem';
+            summaryDiv.style.boxShadow = '0 8px 25px rgba(0,0,0,0.08)';
+            
+            const totalExports = filteredData.length;
+            const totalQuantity = filteredData.reduce((sum, item) => sum + (parseFloat(item['Export Quantity (Tonnes)']) || 0), 0);
+            const avgQuantity = totalQuantity / totalExports;
+            const highDemandExports = filteredData.filter(item => (parseFloat(item['Export Quantity (Tonnes)']) || 0) > 80000).length;
+            
+            summaryDiv.innerHTML = `
+                <h3 style="color: var(--dark); margin-bottom: 1rem; text-align: center;">Export Market Summary</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
+                    <div>
+                        <h4 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">${totalExports}</h4>
+                        <p style="color: #666;">Total Export Records</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">${totalQuantity.toLocaleString()}</h4>
+                        <p style="color: #666;">Total Export Quantity (Tonnes)</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">${avgQuantity.toLocaleString()}</h4>
+                        <p style="color: #666;">Avg Export Quantity</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">${highDemandExports}</h4>
+                        <p style="color: #666;">High Demand Exports</p>
+                    </div>
+                </div>
+                ${searchTerm || currentFilter !== 'all' ? `
+                    <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: rgba(76, 175, 80, 0.1); border-radius: 10px;">
+                        <p style="color: var(--dark); margin: 0;">
+                            <strong>Filtered Results:</strong> Showing ${totalExports} of ${cropData.length} total records
+                            ${searchTerm ? `for "${searchTerm}"` : ''}
+                            ${currentFilter !== 'all' ? `in ${currentFilter}` : ''}
+                        </p>
+                    </div>
+                ` : ''}
+            `;
+            
+            grid.appendChild(summaryDiv);
+        }
+        
+        // Event listeners for filters
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listener for search input
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    searchTerm = this.value;
+                    processAndDisplayData();
+                });
+            }
+            
+            // Add event listeners for filter buttons
+            document.querySelectorAll('.filter-btn[data-crop]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all crop filter buttons
+                    document.querySelectorAll('.filter-btn[data-crop]').forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    currentFilter = this.getAttribute('data-crop');
+                    processAndDisplayData();
+                });
+            });
+            
+            // Add event listeners for sort buttons
+            document.querySelectorAll('.filter-btn[data-sort]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all sort filter buttons
+                    document.querySelectorAll('.filter-btn[data-sort]').forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    currentSort = this.getAttribute('data-sort');
+                    processAndDisplayData();
+                });
+            });
+        });
+        
+        // Function to view crop details
+        function viewDetails(cropName, quantity, country, month) {
+            alert(`Export Analysis for ${cropName}:\n\nExport Quantity: ${quantity.toLocaleString()} Tonnes\nImporting Country: ${country}\nDemand Month: ${month}\n\nThis crop shows ${quantity > 80000 ? 'high' : quantity > 50000 ? 'moderate' : 'low'} export demand based on current market data.`);
+        }
+        
+        // Function to load more items
+        function loadMore() {
+            itemsToShow += 20;
+            displayData();
+        }
+        
+        // Function to toggle wishlist
+        function toggleWishlist(button) {
+            button.classList.toggle('active');
+            const icon = button.querySelector('i');
+            if (button.classList.contains('active')) {
+                icon.style.color = 'var(--sale)';
+            } else {
+                icon.style.color = '#ccc';
+            }
+        }
+        
+        // Load CSV data using Papa Parse
+        Papa.parse("crop_export_data.csv", {
+            download: true,
+            header: true,
+            complete: function(results) {
+                cropData = results.data;
+                console.log(`Loaded ${cropData.length} export records successfully`);
+                processAndDisplayData();
+            },
+            error: function(err) {
+                console.error("Error loading CSV:", err);
+                document.getElementById('loading-placeholder').innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error Loading Data</h3>
+                    <p>Unable to load export data: ${err.message}</p>
+                    <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer;">Retry</button>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
+
