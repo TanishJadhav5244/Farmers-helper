@@ -187,7 +187,7 @@ body {
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
     flex: 1;
-    min-width: 400px;
+    min-width: 340px;
     max-width: 900px;
     text-align: center;
 }
