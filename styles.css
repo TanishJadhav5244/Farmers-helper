@@ -1,15 +1,25 @@
 /* Modern CSS Variables */
 :root {
-    --primary-color: #4CAF50;    /* Fresh green for plants */
-    --secondary-color: #2E7D32;  /* Deep forest green */
-    --accent-color: #8BC34A;     /* Light leaf green */
-    --dark-color: #33691E;       /* Dark forest green */
-    --light-color: #F1F8E9;      /* Light sage */
-    --success-color: #689F38;    /* Olive green */
-    --warning-color: #FFA000;    /* Warm sunflower */
-    --danger-color: #D32F2F;     /* Berry red */
-    --text-color: #1B5E20;       /* Deep nature green */
-    --background-color: #FAFFF2; /* Very light sage */
+    --primary-color: #4CAF50;
+    /* Fresh green for plants */
+    --secondary-color: #2E7D32;
+    /* Deep forest green */
+    --accent-color: #8BC34A;
+    /* Light leaf green */
+    --dark-color: #33691E;
+    /* Dark forest green */
+    --light-color: #F1F8E9;
+    /* Light sage */
+    --success-color: #689F38;
+    /* Olive green */
+    --warning-color: #FFA000;
+    /* Warm sunflower */
+    --danger-color: #D32F2F;
+    /* Berry red */
+    --text-color: #1B5E20;
+    /* Deep nature green */
+    --background-color: #FAFFF2;
+    /* Very light sage */
     --card-bg: rgba(255, 255, 255, 0.95);
     --gradient-primary: linear-gradient(135deg, #4CAF50, #2E7D32);
     --gradient-accent: linear-gradient(135deg, #8BC34A, #558B2F);
@@ -126,9 +136,9 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(76, 175, 80, 0.92), 
-        rgba(46, 125, 50, 0.92));
+    background: linear-gradient(135deg,
+            rgba(76, 175, 80, 0.92),
+            rgba(46, 125, 50, 0.92));
 }
 
 .hero-content {
@@ -170,7 +180,7 @@ body {
     .hero-stats {
         gap: 1rem;
     }
-    
+
     .stat-card {
         min-width: 200px;
         padding: 2rem;
@@ -459,9 +469,10 @@ body {
     from {
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
+
     to {
         text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                     0 0 30px rgba(139, 195, 74, 0.6);
+            0 0 30px rgba(139, 195, 74, 0.6);
     }
 }
 
@@ -470,6 +481,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -545,4 +557,85 @@ body {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+/* Floating chat icon */
+#chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007a5a;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+/* Chat window popup */
+#chat-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+#chat-header {
+    background-color: #007a5a;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.msg {
+    margin: 4px 0;
+}
+
+.user {
+    font-weight: bold;
+}
+
+.bot {
+    color: #007a5a;
+}
+
+#chat-input-area {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+#chat-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+}
+
+#chat-send {
+    background: #007a5a;
+    color: white;
+    border: none;
+    padding: 0 15px;
+    cursor: pointer;
 }
