@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="demand.css">
 </head>
+
 <body>
     <!-- Header -->
     <header>
         <div class="header-container">
-            <h1>Demanded<span>Crops</span></h1>
-            <div class="logo">   
+            <h1>Demanded<span> Crops</span></h1>
+            <div class="logo">
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="seeds.html"><i class="fas fa-seedling"></i> Seeds</a></li>
-                    <li><a href="demandedcrop.html" class="active"><i class="fas fa-chart-line"></i> Market Analysis</a></li>
+                    <li><a href="demandedcrop.html" class="active"><i class="fas fa-chart-line"></i> Market Analysis</a>
+                    </li>
                 </ul>
             </nav>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
+        </div>
+        <div id="scroll-marker" class="scroll-marker">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </header>
 
@@ -31,7 +37,8 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Export Market Analysis</h1>
-            <p>Discover the most demanded crops in international markets and make informed decisions for your farming business</p>
+            <p>Discover the most demanded crops in international markets and make informed decisions for your farming
+                business</p>
             <a href="#products" class="btn btn-primary">View Export Data</a>
         </div>
     </section>
@@ -42,14 +49,15 @@
             <h2>Export Market Trends</h2>
             <p>Real-time data on crop export demand and international market trends</p>
         </div>
-        
+
         <!-- Filter Section -->
         <div class="filters">
             <div class="filter-group">
                 <h3>Search & Filter:</h3>
                 <div style="margin-bottom: 1rem;">
-                    <input type="text" id="search-input" placeholder="Search by crop name, importing country, or demand month..." 
-                           style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                    <input type="text" id="search-input"
+                        placeholder="Search by crop name, importing country, or demand month..."
+                        style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
                 </div>
             </div>
             <div class="filter-group">
@@ -85,14 +93,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Loading Placeholder -->
         <div class="loading-placeholder" id="loading-placeholder">
             <i class="fas fa-chart-line"></i>
             <h3>Loading Export Data...</h3>
             <p>Please wait while we fetch the latest crop export and international market demand information.</p>
         </div>
-        
+
         <!-- Products Grid - This will be populated with CSV data -->
         <div class="products-grid" id="market-data-grid">
             <!-- CSV data will be dynamically loaded here -->
@@ -102,7 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script>
         // Simple mobile menu toggle functionality
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
             const nav = document.querySelector('nav ul');
             if (nav.style.display === 'flex') {
                 nav.style.display = 'none';
@@ -110,7 +118,29 @@
                 nav.style.display = 'flex';
             }
         });
-        
+
+        // Marker to scroll down
+        const scrollMarker = document.getElementById('scroll-marker');
+
+        window.addEventListener('scroll', () => {
+            // Hide marker when user scrolls more than 100px vertically (adjust as needed)
+            if (window.scrollY > 100) {
+                scrollMarker.classList.add('hidden');
+            } else {
+                scrollMarker.classList.remove('hidden');
+            }
+        });
+
+        // Optional: make marker clickable to scroll down
+        scrollMarker.addEventListener('click', () => {
+            window.scrollBy({
+                top: window.innerHeight / 2,
+                left: 0,
+                behavior: 'smooth'
+            });
+        });
+
+
         // CSV Data Loading and Processing
         let cropData = [];
         let filteredData = [];
@@ -118,12 +148,12 @@
         let currentSort = 'quantity';
         let searchTerm = '';
         let itemsToShow = 20;
-        
+
         // Function to process and display data
         function processAndDisplayData() {
             // Hide loading placeholder
             document.getElementById('loading-placeholder').style.display = 'none';
-            
+
             if (!cropData || cropData.length === 0) {
                 document.getElementById('market-data-grid').innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
@@ -134,37 +164,37 @@
                 `;
                 return;
             }
-            
+
             // Filter data
-            let tempFiltered = currentFilter === 'all' 
-                ? cropData 
+            let tempFiltered = currentFilter === 'all'
+                ? cropData
                 : cropData.filter(item => item['Crop Name'] === currentFilter);
-            
+
             // Apply search filter
             if (searchTerm.trim()) {
                 const searchLower = searchTerm.toLowerCase();
-                tempFiltered = tempFiltered.filter(item => 
+                tempFiltered = tempFiltered.filter(item =>
                     item['Crop Name'].toLowerCase().includes(searchLower) ||
                     item['Importing Country'].toLowerCase().includes(searchLower) ||
                     item['Demand Month'].toLowerCase().includes(searchLower)
                 );
             }
-            
+
             filteredData = tempFiltered;
-            
+
             // Reset items to show when filters change
             itemsToShow = 20;
-            
+
             // Sort data
             sortData();
-            
+
             // Display data
             displayData();
         }
-        
+
         // Function to sort data
         function sortData() {
-            switch(currentSort) {
+            switch (currentSort) {
                 case 'quantity':
                     filteredData.sort((a, b) => {
                         const aVal = parseFloat(a['Export Quantity (Tonnes)']) || 0;
@@ -188,12 +218,12 @@
                     break;
             }
         }
-        
+
         // Function to display data
         function displayData() {
             const grid = document.getElementById('market-data-grid');
             grid.innerHTML = '';
-            
+
             if (filteredData.length === 0) {
                 grid.innerHTML = `
                     <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: #666;">
@@ -205,25 +235,25 @@
                 `;
                 return;
             }
-            
+
             // Take items for display
             const displayData = filteredData.slice(0, itemsToShow);
-            
+
             displayData.forEach((item, index) => {
                 const card = createProductCard(item, index);
                 grid.appendChild(card);
             });
-            
+
             // Add summary statistics
             addSummaryStatistics();
-            
+
             // Add load more button if there are more items
             if (filteredData.length > itemsToShow) {
                 const loadMoreDiv = document.createElement('div');
                 loadMoreDiv.style.gridColumn = '1 / -1';
                 loadMoreDiv.style.textAlign = 'center';
                 loadMoreDiv.style.marginTop = '2rem';
-                
+
                 loadMoreDiv.innerHTML = `
                     <button onclick="loadMore()" style="
                         padding: 1rem 2rem; 
@@ -238,30 +268,31 @@
                         Load More (${filteredData.length - itemsToShow} more items)
                     </button>
                 `;
-                
+
                 grid.appendChild(loadMoreDiv);
             }
         }
-        
+
         // Function to create product card
         function createProductCard(item, index) {
             const card = document.createElement('div');
             card.className = 'product-card';
-            
+
             // Calculate demand score based on export quantity
             const quantity = parseFloat(item['Export Quantity (Tonnes)']) || 0;
             const demandScore = Math.min(100, Math.round((quantity / 150000) * 100));
             const isHighDemand = demandScore > 70;
-            
+
+            // Show the info in card
             card.innerHTML = `
                 ${isHighDemand ? '<div class="product-badge">High Demand</div>' : ''}
                 <div class="product-img">
-                    ${item['Exporting Crop Images '] ? 
-                        `<img src="${item['Exporting Crop Images ']}" alt="${item['Crop Name']}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">` : 
-                        `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4CAF50, #2E7D32); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                    ${item['Exporting Crop Images '] ?
+                    `<img src="${item['Exporting Crop Images ']}" alt="${item['Crop Name']}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">` :
+                    `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #4CAF50, #2E7D32); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
                             <i class="fas fa-seedling"></i>
                         </div>`
-                    }
+                }   
                     <div class="quick-view">View Details</div>
                 </div>
                 <div class="product-content">
@@ -280,16 +311,17 @@
                         <button class="add-to-cart" onclick="viewDetails('${item['Crop Name']}', ${quantity}, '${item['Importing Country']}', '${item['Demand Month']}')">
                             View Export Analysis
                         </button>
+                        <button class="add-to-cart" onclick="window.open(getFlipkartUrl('${item['Crop Name']}'), '_blank')">Buy Seed</button>
                         <button class="wishlist" onclick="toggleWishlist(this)">
                             <i class="fas fa-heart"></i>
                         </button>
                     </div>
                 </div>
             `;
-            
+
             return card;
         }
-        
+
         // Function to add summary statistics
         function addSummaryStatistics() {
             const grid = document.getElementById('market-data-grid');
@@ -300,12 +332,12 @@
             summaryDiv.style.padding = '2rem';
             summaryDiv.style.marginTop = '2rem';
             summaryDiv.style.boxShadow = '0 8px 25px rgba(0,0,0,0.08)';
-            
+
             const totalExports = filteredData.length;
             const totalQuantity = filteredData.reduce((sum, item) => sum + (parseFloat(item['Export Quantity (Tonnes)']) || 0), 0);
             const avgQuantity = totalQuantity / totalExports;
             const highDemandExports = filteredData.filter(item => (parseFloat(item['Export Quantity (Tonnes)']) || 0) > 80000).length;
-            
+
             summaryDiv.innerHTML = `
                 <h3 style="color: var(--dark); margin-bottom: 1rem; text-align: center;">Export Market Summary</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
@@ -336,59 +368,65 @@
                     </div>
                 ` : ''}
             `;
-            
+
             grid.appendChild(summaryDiv);
         }
-        
+
         // Event listeners for filters
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Add event listener for search input
             const searchInput = document.getElementById('search-input');
             if (searchInput) {
-                searchInput.addEventListener('input', function() {
+                searchInput.addEventListener('input', function () {
                     searchTerm = this.value;
                     processAndDisplayData();
                 });
             }
-            
+
             // Add event listeners for filter buttons
             document.querySelectorAll('.filter-btn[data-crop]').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     // Remove active class from all crop filter buttons
                     document.querySelectorAll('.filter-btn[data-crop]').forEach(b => b.classList.remove('active'));
                     // Add active class to clicked button
                     this.classList.add('active');
-                    
+
                     currentFilter = this.getAttribute('data-crop');
                     processAndDisplayData();
                 });
             });
-            
+
             // Add event listeners for sort buttons
             document.querySelectorAll('.filter-btn[data-sort]').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     // Remove active class from all sort filter buttons
                     document.querySelectorAll('.filter-btn[data-sort]').forEach(b => b.classList.remove('active'));
                     // Add active class to clicked button
                     this.classList.add('active');
-                    
+
                     currentSort = this.getAttribute('data-sort');
                     processAndDisplayData();
                 });
             });
         });
-        
+
         // Function to view crop details
         function viewDetails(cropName, quantity, country, month) {
             alert(`Export Analysis for ${cropName}:\n\nExport Quantity: ${quantity.toLocaleString()} Tonnes\nImporting Country: ${country}\nDemand Month: ${month}\n\nThis crop shows ${quantity > 80000 ? 'high' : quantity > 50000 ? 'moderate' : 'low'} export demand based on current market data.`);
         }
-        
+
         // Function to load more items
         function loadMore() {
             itemsToShow += 20;
             displayData();
         }
-        
+
+        // Function to buy seeds from Flipkart
+        function getFlipkartUrl(productName) {
+            const encodedName = encodeURIComponent(productName);
+            return `https://www.flipkart.com/search?q=${encodedName} seed`;
+        }
+
         // Function to toggle wishlist
         function toggleWishlist(button) {
             button.classList.toggle('active');
@@ -399,17 +437,17 @@
                 icon.style.color = '#ccc';
             }
         }
-        
+
         // Load CSV data using Papa Parse
         Papa.parse("Export_Crops_Data.csv", {
             download: true,
             header: true,
-            complete: function(results) {
+            complete: function (results) {
                 cropData = results.data;
                 console.log(`Loaded ${cropData.length} export records successfully`);
                 processAndDisplayData();
             },
-            error: function(err) {
+            error: function (err) {
                 console.error("Error loading CSV:", err);
                 document.getElementById('loading-placeholder').innerHTML = `
                     <i class="fas fa-exclamation-triangle"></i>
@@ -421,5 +459,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>
