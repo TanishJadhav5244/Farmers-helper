@@ -42,28 +42,9 @@ header {
 
 .logo {
     display: flex;
+    color: #2E7D32;
     align-items: center;
     gap: 15px;
-}
-
-.logo img {
-    height: 50px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.logo-text h1 {
-    font-size: 1.8rem;
-    color: var(--dark);
-    font-weight: 700;
-}
-
-.logo-text span {
-    color: var(--primary);
-    background: linear-gradient(45deg, var(--primary), var(--dark));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 nav ul {
